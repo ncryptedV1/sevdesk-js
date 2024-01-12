@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "unbuild"
+    "build": "unbuild",
+    "prepare": "npm run build"
   },
   "files": [
     "./dist",
