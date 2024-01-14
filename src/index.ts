@@ -4359,7 +4359,7 @@ export interface Model_CommunicationWay {
   contact?: ObjectReference;
 
   /** Type of the communication way */
-  type: EnumModel_CommunicationWayUpdateType;
+  type: EnumModel_CommunicationWayType;
 
   /** The value of the communication way.<br>
      For example the phone number, e-mail address or website. */
