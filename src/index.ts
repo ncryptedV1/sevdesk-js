@@ -742,7 +742,7 @@ export class ContactAddressService {
       body?: Model_ContactAddressUpdate;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<Model_ContactAddressResponse> {
+  ): Promise<ObjectsWrapper<Model_ContactAddressResponse>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/ContactAddress/{contactAddressId}";
       url = url.replace("{contactAddressId}", params["contactAddressId"] + "");
