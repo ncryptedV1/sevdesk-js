@@ -716,7 +716,7 @@ export class ContactAddressService {
       contactAddressId: number;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<ObjectsWrapper<Array<Model_ContactAddressResponse>>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/ContactAddress/{contactAddressId}";
       url = url.replace("{contactAddressId}", params["contactAddressId"] + "");
