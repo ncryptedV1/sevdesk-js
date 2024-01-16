@@ -2537,6 +2537,37 @@ export class InvoiceService {
       axios(configs, resolve, reject);
     });
   }
+  /**
+   * Activate Auto Sending of an invoice (mainly useful for repeating invoices)
+   * NOTE: this endpoint is not listed in the official API docs but can be observed when using the frontend
+   */
+  static activateAutoSending(
+    params: {
+      /** ID of invoice to activate auto sending for */
+      invoiceId: number;
+      /** requestBody */
+      body?: Model_InvoiceActivateAutoSending;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + "/Invoice/{invoiceId}/activateAutoSending";
+      url = url.replace("{invoiceId}", params["invoiceId"] + "");
+
+      const configs: IRequestConfig = getConfigs(
+        "post",
+        "application/json",
+        url,
+        options
+      );
+
+      let data = params.body;
+
+      configs.data = data;
+
+      axios(configs, resolve, reject);
+    });
+  }
 }
 
 export class InvoicePosService {
@@ -5889,6 +5920,20 @@ export interface Model_SendInvoiceViaEMail {
   bccEmail?: string;
 }
 
+export interface Model_InvoiceActivateAutoSending {
+  /** communication type to use for auto sending the invoice - usually "VM" (not sure whether another would even work) */
+  sendType: EnumModel_InvoiceActivateAutoSendingSendType;
+
+  /** No clue, what this is - in my tests this value always was "P0D" */
+  timeValue: string;
+
+  /** Whether the supplied timeValue is a date */
+  timeValueIsDate: boolean;
+
+  /** Text template to use for sending the automated invoice. */
+  textTemplate: ObjectReference;
+}
+
 export interface Model_Email {
   /** The email id */
   id?: number;
@@ -7356,6 +7401,12 @@ export enum EnumModel_CreateInvoiceFromOrderType {
   "gross" = "gross",
 }
 type IModel_CreateInvoiceFromOrderPartialType = "RE" | "TR" | "AR";
+export enum EnumModel_InvoiceActivateAutoSendingSendType {
+  "VPR" = "VPR", // printed
+  "VPDF" = "VPDF", // downloaded
+  "VM" = "VM", // mailed
+  "VP" = "VP" // postal
+}
 export enum EnumModel_ChangeLayoutKey {
   "language" = "language",
   "template" = "template",
