@@ -4043,7 +4043,7 @@ If it holds a value, the contact will be regarded as an organization. */
   name?: string;
 
   /** Defines the status of the contact. 100 <-> Lead - 500 <-> Pending - 1000 <-> Active. */
-  status?: number;
+  status?: EnumModel_ContactStatus;
 
   /** The customer number */
   customerNumber?: string;
@@ -4066,7 +4066,7 @@ Not to be used for organizations. */
 
   /** Category of the contact.<br> For more information,
      see <a href='https:\/\/my.sevdesk.de\/apiOverview\/index.html#\/doc-contacts#types'>here<\/a>. */
-  category: ObjectReference;
+  category: EnumModel_ContactCategory;
 
   /** A description for the contact. */
   description?: string;
@@ -4143,7 +4143,7 @@ If it holds a value, the contact will be regarded as an organization. */
   name?: string;
 
   /** Defines the status of the contact. 100 <-> Lead - 500 <-> Pending - 1000 <-> Active. */
-  status?: number;
+  status?: EnumModel_ContactStatus;
 
   /** The customer number */
   customerNumber?: string;
@@ -4166,7 +4166,7 @@ Not to be used for organizations. */
 
   /** Category of the contact.<br> For more information,
      see <a href='https:\/\/my.sevdesk.de\/apiOverview\/index.html#\/doc-contacts#types'>here<\/a>. */
-  category?: ObjectReference;
+  category?: EnumModel_ContactCategory;
 
   /** A description for the contact. */
   description?: string;
@@ -7263,6 +7263,29 @@ export enum EnumModel_ContactResponseTaxType {
   "noteu" = "noteu",
   "custom" = "custom",
   "ss" = "ss",
+}
+export enum EnumModel_ContactStatus {
+  "LEAD"=100,
+  "PENDING"=500,
+  "ACTIVE"=1000
+}
+export enum EnumModel_ContactCategory {
+  "SUPPLIER"={
+    id: 2,
+    objectName: "Category"
+  },
+  "CUSTOMER"={
+    id: 3,
+    objectName: "Category"
+  },
+  "PARTNER"={
+    id: 4,
+    objectName: "Category"
+  },
+  "PROSPECT_CUSTOMER"={
+    id: 28,
+    objectName: "Category"
+  }
 }
 export enum EnumModel_ContactTaxType {
   "default" = "default",
