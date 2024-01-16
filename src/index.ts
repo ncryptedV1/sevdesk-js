@@ -2182,7 +2182,7 @@ export class InvoiceService {
       endDate?: number;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<ObjectsWrapper<Array<Model_InvoiceResponse>>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Invoice";
 
@@ -2211,7 +2211,7 @@ export class InvoiceService {
       body?: saveInvoice;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<saveInvoiceResponse> {
+  ): Promise<ObjectsWrapper<saveInvoiceResponse>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Invoice/Factory/saveInvoice";
 
@@ -2231,6 +2231,7 @@ export class InvoiceService {
   }
   /**
    * Find invoice by ID
+   * NOTE: API returns an array, instead of just single object
    */
   static getInvoiceById(
     params: {
@@ -2238,7 +2239,7 @@ export class InvoiceService {
       invoiceId: number;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<ObjectsWrapper<Array<Model_InvoiceResponse>>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Invoice/{invoiceId}";
       url = url.replace("{invoiceId}", params["invoiceId"] + "");
@@ -2268,7 +2269,7 @@ export class InvoiceService {
       embed?: any | null[];
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<ObjectsWrapper<Array<Model_InvoicePosResponse>>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Invoice/{invoiceId}/getPositions";
       url = url.replace("{invoiceId}", params["invoiceId"] + "");
@@ -2426,7 +2427,7 @@ export class InvoiceService {
       /** ID of invoice to be sent via email */
       invoiceId: number;
       /** requestBody */
-      body?: sendInvoiceViaEMail;
+      body?: Model_SendInvoiceViaEMail;
     } = {} as any,
     options: IRequestOptions = {}
   ): Promise<Model_Email> {
@@ -5308,22 +5309,22 @@ export interface Model_PartUpdate {
 
 export interface Model_InvoiceResponse {
   /** The invoice id */
-  id?: string;
+  id: string;
 
   /** The invoice object name */
-  objectName?: string;
+  objectName: string;
 
   /** The invoice number */
   invoiceNumber?: string;
 
   /** The contact used in the invoice */
-  contact?: object;
+  contact: ResponseObjectReference;
 
   /** Date of invoice creation */
-  create?: Date;
+  create: Date;
 
   /** Date of last invoice update */
-  update?: Date;
+  update: Date;
 
   /** Client to which invoice belongs. Will be filled automatically */
   sevClient?: object;
@@ -5354,7 +5355,7 @@ export interface Model_InvoiceResponse {
   discount?: string;
 
   /** Can be omitted as complete address is defined in address attribute */
-  addressCountry?: object;
+  addressCountry?: ResponseObjectReference;
 
   /** Needs to be timestamp or dd.mm.yyyy */
   payDate?: Date;
@@ -5375,7 +5376,7 @@ export interface Model_InvoiceResponse {
   smallSettlement?: boolean;
 
   /** The user who acts as a contact person for the invoice */
-  contactPerson?: object;
+  contactPerson?: ResponseObjectReference;
 
   /** Is overwritten by invoice position tax rates */
   taxRate?: string;
@@ -5398,7 +5399,7 @@ Tax rates are heavily connected to the tax type used. */
   taxType?: EnumModel_InvoiceResponseTaxType;
 
   /** Payment method used for the invoice */
-  paymentMethod?: object;
+  paymentMethod?: ResponseObjectReference;
 
   /** Cost centre for the invoice */
   costCentre?: object;
@@ -5508,16 +5509,16 @@ export interface Model_Invoice {
   id?: number;
 
   /** The invoice object name. */
-  objectName?: string;
+  objectName: string;
 
   /** The invoice number */
   invoiceNumber?: string;
 
   /** The contact used in the invoice */
-  contact: object;
+  contact: ObjectReference;
 
   /** The user who acts as a contact person for the invoice */
-  contactPerson: object;
+  contactPerson: ObjectReference;
 
   /** Date of invoice creation */
   create?: Date;
@@ -5554,7 +5555,7 @@ export interface Model_Invoice {
   address?: string;
 
   /** Can be omitted as complete address is defined in address attribute */
-  addressCountry: object;
+  addressCountry: ObjectReference;
 
   /** Needs to be timestamp or dd.mm.yyyy */
   payDate?: Date;
@@ -5602,7 +5603,7 @@ Tax rates are heavily connected to the tax type used. */
   dunningLevel?: number;
 
   /** Payment method used for the invoice */
-  paymentMethod?: object;
+  paymentMethod?: ObjectReference;
 
   /** The date the invoice was sent to the customer */
   sendDate?: Date;
@@ -5694,10 +5695,10 @@ export interface Model_InvoicePos {
   update?: Date;
 
   /** The invoice to which the position belongs. */
-  invoice?: object;
+  invoice?: ObjectReference;
 
   /** Part from your inventory which is used in the position. */
-  part?: object;
+  part?: ObjectReference;
 
   /** Quantity of the article\/part */
   quantity: number;
@@ -5709,7 +5710,7 @@ export interface Model_InvoicePos {
   name?: string;
 
   /** The unit in which the positions part is measured */
-  unity: object;
+  unity: ObjectReference;
 
   /** Client to which invoice position belongs. Will be filled automatically */
   sevClient?: object;
@@ -5770,22 +5771,22 @@ export interface saveInvoice {
 
 export interface Model_InvoicePosResponse {
   /** The invoice position id */
-  id?: string;
+  id: string;
 
   /** The invoice position object name */
-  objectName?: string;
+  objectName: string;
 
   /** Date of invoice position creation */
-  create?: Date;
+  create: Date;
 
   /** Date of last invoice position update */
-  update?: Date;
+  update: Date;
 
   /** The invoice to which the position belongs. */
-  invoice?: object;
+  invoice?: ResponseObjectReference;
 
   /** Part from your inventory which is used in the position. */
-  part?: object;
+  part?: ResponseObjectReference;
 
   /** Quantity of the article\/part */
   quantity?: boolean;
@@ -5797,7 +5798,7 @@ export interface Model_InvoicePosResponse {
   name?: string;
 
   /** The unit in which the positions part is measured */
-  unity?: object;
+  unity?: ResponseObjectReference;
 
   /** Client to which invoice position belongs. Will be filled automatically */
   sevClient?: object;
@@ -5838,10 +5839,10 @@ export interface Model_InvoicePosResponse {
 
 export interface saveInvoiceResponse {
   /**  */
-  invoice?: Model_InvoiceResponse;
+  invoice: Model_InvoiceResponse;
 
   /**  */
-  invoicePos?: Model_InvoicePosResponse[];
+  invoicePos: Model_InvoicePosResponse[];
 
   /** Filename of a previously upload file which should be attached. */
   filename?: string;
@@ -5864,7 +5865,7 @@ export interface Model_CreateInvoiceFromOrder {
   partialType?: IModel_CreateInvoiceFromOrderPartialType;
 }
 
-export interface sendInvoiceViaEMail {
+export interface Model_SendInvoiceViaEMail {
   /** The recipient of the email. */
   toEmail: string;
 
