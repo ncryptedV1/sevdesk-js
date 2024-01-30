@@ -5820,10 +5820,10 @@ export interface Model_InvoicePosResponse {
   part?: ResponseObjectReference;
 
   /** Quantity of the article\/part */
-  quantity?: boolean;
+  quantity?: number;
 
   /** Price of the article\/part. Is either gross or net, depending on the sevDesk account setting. */
-  price?: string;
+  price?: number;
 
   /** Name of the article\/part. */
   name?: string;
@@ -5844,28 +5844,28 @@ export interface Model_InvoicePosResponse {
   discount?: string;
 
   /** Tax rate of the position. */
-  taxRate?: string;
+  taxRate?: number;
 
   /** Discount sum of the position */
-  sumDiscount?: string;
+  sumDiscount?: number;
 
   /** Net accounting sum of the position */
-  sumNetAccounting?: string;
+  sumNetAccounting?: number;
 
   /** Tax accounting sum of the position */
-  sumTaxAccounting?: string;
+  sumTaxAccounting?: number;
 
   /** Gross accounting sum of the position */
-  sumGrossAccounting?: string;
+  sumGrossAccounting?: number;
 
   /** Net price of the part */
-  priceNet?: string;
+  priceNet?: number;
 
   /** Gross price of the part */
-  priceGross?: string;
+  priceGross?: number;
 
   /** Tax on the price of the part */
-  priceTax?: string;
+  priceTax?: number;
 }
 
 export interface saveInvoiceResponse {
