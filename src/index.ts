@@ -5756,7 +5756,7 @@ export interface Model_InvoicePos {
   discount?: number;
 
   /** An optional absolute discount of the position. */
-  discountValue?: number;
+  discountedValue?: number;
 
   /** An optional switch indicating whether the discount is relative (default true). */
   isPercentage?: boolean;
