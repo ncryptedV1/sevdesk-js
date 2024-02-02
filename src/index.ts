@@ -5752,8 +5752,14 @@ export interface Model_InvoicePos {
   /** A text describing your position. */
   text?: string;
 
-  /** An optional discount of the position. */
+  /** An optional relative discount of the position. */
   discount?: number;
+
+  /** An optional absolute discount of the position. */
+  discountValue?: number;
+
+  /** An optional switch indicating whether the discount is relative (default true). */
+  isPercentage?: boolean;
 
   /** Tax rate of the position. */
   taxRate: number;
