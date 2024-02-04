@@ -7716,18 +7716,18 @@ export enum EnumModel_VoucherUpdateVoucherType {
   "RV" = "RV",
 }
 export enum EnumModel_TextTemplateCategory {
-  "MAIL",
-  "DOCUMENT",
+  "MAIL" = "MAIL",
+  "DOCUMENT" = "DOCUMENT",
 }
 export enum EnumModel_TextTemplateObjectType {
-  "ALL",
-  "AN",
-  "MA",
-  "PAYMENT_CONFIRMATION",
-  "RE"
+  "ALL" = "ALL",
+  "AN" = "AN",
+  "MA" = "MA",
+  "PAYMENT_CONFIRMATION" = "PAYMENT_CONFIRMATION",
+  "RE" = "RE",
 }
 export enum EnumModel_TextTemplateTextType {
-  "TEXT",
-  "HEAD",
-  "FOOT",
+  "TEXT" = "TEXT",
+  "HEAD" = "HEAD",
+  "FOOT" = "FOOT",
 }
