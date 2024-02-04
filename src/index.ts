@@ -4685,7 +4685,7 @@ export interface Model_creditNoteResponse {
   deliveryTerms?: string;
 
   /** Timestamp. This can also be a date range if you also use the attribute deliveryDateUntil */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** Payment terms of the creditNote */
   paymentTerms?: string;
@@ -5138,7 +5138,7 @@ export interface Model_creditNoteUpdate {
   deliveryTerms?: string;
 
   /** Timestamp. This can also be a date range if you also use the attribute deliveryDateUntil */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** Payment terms of the creditNote */
   paymentTerms?: string;
@@ -5476,7 +5476,7 @@ export interface Model_InvoiceResponse {
   createUser?: object;
 
   /** Timestamp. This can also be a date range if you also use the attribute deliveryDateUntil */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** Please have a look in our
      <a href='https:\/\/api.sevdesk.de\/#section\/Types-and-status-of-invoices'>Types and status of invoices<\/a>
@@ -5676,11 +5676,11 @@ export interface Model_Invoice {
   createUser?: object;
 
   /** Timestamp. This can also be a date range if you also use the attribute deliveryDateUntil */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** If the delivery date should be a time range, another timestamp can be provided in this attribute
    * to define a range from timestamp used in deliveryDate attribute to the timestamp used here. */
-  deliveryDateUntil?: number;
+  deliveryDateUntil?: string;
 
   /** Please have a look in our
      <a href='https:\/\/api.sevdesk.de\/#section\/Types-and-status-of-invoices'>Types and status of invoices<\/a>
@@ -6871,10 +6871,10 @@ Tax rates are heavily connected to the tax type used. */
   paymentDeadline?: Date;
 
   /** Needs to be provided as timestamp or dd.mm.yyyy */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** Needs to be provided as timestamp or dd.mm.yyyy */
-  deliveryDateUntil?: Date;
+  deliveryDateUntil?: string;
 
   /** The document of the voucher. */
   document?: object;
@@ -7099,10 +7099,10 @@ Tax rates are heavily connected to the tax type used. */
   paymentDeadline?: Date;
 
   /** Needs to be provided as timestamp or dd.mm.yyyy */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** Needs to be provided as timestamp or dd.mm.yyyy */
-  deliveryDateUntil?: Date;
+  deliveryDateUntil?: string;
 }
 
 export interface Model_VoucherPosResponse {
@@ -7247,10 +7247,10 @@ Tax rates are heavily connected to the tax type used. */
   paymentDeadline?: Date;
 
   /** Needs to be provided as timestamp or dd.mm.yyyy */
-  deliveryDate?: Date;
+  deliveryDate?: string;
 
   /** Needs to be provided as timestamp or dd.mm.yyyy */
-  deliveryDateUntil?: Date;
+  deliveryDateUntil?: string;
 
   /** The document of the voucher. */
   document?: object;
