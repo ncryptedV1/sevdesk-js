@@ -2041,7 +2041,7 @@ export class PartService {
       name?: string;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<ObjectsWrapper<Array<Model_PartResponse>>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Part";
 
@@ -2068,7 +2068,7 @@ export class PartService {
       body?: Model_Part;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<Model_Part> {
+  ): Promise<Model_PartResponse> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Part";
 
@@ -2095,7 +2095,7 @@ export class PartService {
       partId: number;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<ObjectsWrapper<Array<Model_PartResponse>>> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Part/{partId}";
       url = url.replace("{partId}", params["partId"] + "");
@@ -2121,7 +2121,7 @@ export class PartService {
       body?: Model_PartUpdate;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<Model_Part> {
+  ): Promise<Model_PartResponse> {
     return new Promise((resolve, reject) => {
       let url = basePath + "/Part/{partId}";
       url = url.replace("{partId}", params["partId"] + "");
@@ -5384,6 +5384,67 @@ export interface Model_PartUpdate {
 
   /** Status of the part. 50 <-> Inactive - 100 <-> Active */
   status?: IModel_PartUpdateStatus;
+
+  /** An internal comment for the part.<br>
+     Does not appear on invoices and orders. */
+  internalComment?: string;
+}
+
+export interface Model_PartResponse {
+  /** The part id */
+  id: number;
+
+  /** The part object name */
+  objectName: string;
+
+  /** Date of part creation */
+  create: Date;
+
+  /** Date of last part update */
+  update: Date;
+
+  /** Name of the part */
+  name: string;
+
+  /** The part number */
+  partNumber: string;
+
+  /** A text describing the part */
+  text: string;
+
+  /** Category of the part.<br>
+    For all categories, send a GET to \/Category?objectType=Part */
+  category: ResponseObjectReference;
+
+  /** The stock of the part */
+  stock: number;
+
+  /** Defines if the stock should be enabled */
+  stockEnabled?: boolean;
+
+  /** The unit in which the part is measured */
+  unity: ResponseObjectReference;
+
+  /** Net price for which the part is sold. we will change this parameter so that the gross  price is calculated automatically, until then the priceGross parameter must be used. */
+  price: string;
+
+  /** Net price for which the part is sold */
+  priceNet: string;
+
+  /** Gross price for which the part is sold */
+  priceGross: string;
+
+  /** Client to which part belongs. Will be filled automatically */
+  sevClient: ResponseObjectReference;
+
+  /** Purchase price of the part */
+  pricePurchase: string;
+
+  /** Tax rate of the part */
+  taxRate: string;
+
+  /** Status of the part. 50 <-> Inactive - 100 <-> Active */
+  status: IModel_PartStatus;
 
   /** An internal comment for the part.<br>
      Does not appear on invoices and orders. */
