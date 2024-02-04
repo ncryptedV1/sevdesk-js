@@ -2168,6 +2168,30 @@ export class PartService {
 
 export class InvoiceService {
   /**
+   * Get next free invoice number
+   */
+  static getNextInvoiceNumber(
+    options: IRequestOptions = {}
+  ): Promise<ObjectsWrapper<Model_SevSequenceResponse>> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + "/SevSequence/Factory/getByType";
+
+      const configs: IRequestConfig = getConfigs(
+        "get",
+        "application/json",
+        url,
+        options
+      );
+      configs.params = {
+        objectType: "Invoice",
+        type: "RE"
+      }
+
+      axios(configs, resolve, reject);
+    });
+  }
+
+  /**
    * Retrieve invoices
    */
   static getInvoices(
@@ -3651,6 +3675,34 @@ export class TagService {
         url,
         options
       );
+
+      axios(configs, resolve, reject);
+    });
+  }
+}
+
+export class TextTemplateService {
+  /**
+   * Retrieve text templates
+   */
+  static getTextTemplate(
+    params: {
+      category?: EnumModel_TextTemplateCategory;
+      objectType?: EnumModel_TextTemplateObjectType;
+      textType?: EnumModel_TextTemplateTextType;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<ObjectsWrapper<Array<Model_TextTemplateResponse>>> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + "/TextTemplate";
+
+      const configs: IRequestConfig = getConfigs(
+        "get",
+        "application/json",
+        url,
+        options
+      );
+      configs.params = { category: params.category, objectType: params.objectType, textType: params.textType };
 
       axios(configs, resolve, reject);
     });
@@ -5336,6 +5388,35 @@ export interface Model_PartUpdate {
   /** An internal comment for the part.<br>
      Does not appear on invoices and orders. */
   internalComment?: string;
+}
+
+export interface Model_SevSequenceResponse {
+  /** The sev sequence id */
+  id: string;
+
+  /** The sev sequence object name */
+  objectName: string;
+
+  /** Date of sev sequence creation */
+  create: Date;
+
+  /** Date of last sev sequence update */
+  update: Date;
+
+  /** Example: "Invoice" */
+  forObject: string;
+
+  /** The format of the sev sequence, e.g. "RE-%NUMBER" */
+  format: string;
+
+  /** The number of the sev sequence, e.g. "1010" */
+  nextSequence: string;
+
+  /** The type of the sev sequence, e.g. "RE" */
+  type: string;
+
+  /** Client to which sev sequence belongs. Will be filled automatically */
+  sevClient?: object;
 }
 
 export interface Model_InvoiceResponse {
@@ -7220,6 +7301,39 @@ export interface Model_TagCreateResponse {
   /** Client to which invoice belongs. Will be filled automatically */
   sevClient?: object;
 }
+
+export interface Model_TextTemplateResponse {
+  /** The text template id */
+  id: string;
+
+  /** The text template object name */
+  objectName: string;
+
+  /** Date of text template creation */
+  create: Date;
+
+  /** Date of last text template update */
+  update: Date;
+
+  /** The name of the text template (e.g. "Standard") */
+  name: string;
+
+  /** The text of the text template */
+  text: string;
+
+  /** The category of the text template */
+  category: EnumModel_TextTemplateCategory;
+
+  /** The object type of the text template */
+  objectType: EnumModel_TextTemplateObjectType;
+
+  /** The text type of the text template */
+  textType: EnumModel_TextTemplateTextType;
+
+  /** Client to which text template belongs. Will be filled automatically */
+  sevClient?: object;
+}
+
 export enum EnumModel_CheckAccountResponseType {
   "online" = "online",
   "offline" = "offline",
@@ -7539,4 +7653,20 @@ export enum EnumModel_VoucherUpdateCreditDebit {
 export enum EnumModel_VoucherUpdateVoucherType {
   "VOU" = "VOU",
   "RV" = "RV",
+}
+export enum EnumModel_TextTemplateCategory {
+  "MAIL",
+  "DOCUMENT",
+}
+export enum EnumModel_TextTemplateObjectType {
+  "ALL",
+  "AN",
+  "MA",
+  "PAYMENT_CONFIRMATION",
+  "RE"
+}
+export enum EnumModel_TextTemplateTextType {
+  "TEXT",
+  "HEAD",
+  "FOOT",
 }
