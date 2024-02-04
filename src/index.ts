@@ -7730,4 +7730,6 @@ export enum EnumModel_TextTemplateTextType {
   "TEXT" = "TEXT",
   "HEAD" = "HEAD",
   "FOOT" = "FOOT",
+  "SUBJECT" = "SUBJECT",
+  "SIGNATURE" = "SIGNATURE",
 }
