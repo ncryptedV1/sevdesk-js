@@ -5752,14 +5752,20 @@ export interface Model_Invoice {
     If yes, the invoice must not contain any vat */
   smallSettlement?: boolean;
 
-  /** Is overwritten by invoice position tax rates */
+  /** This is not used anymore. Use the taxRate of the individual positions instead. */
   taxRate: number;
+
+  /** Use this in sevdesk-Update 2.0 (replaces taxType / taxSet).
+
+See <a href='https:\/\/api.sevdesk.de\/#section\/sevdesk-Update-2.0/Tax-Rules'>list of available VAT rules<\/a>. */
+  taxRule: EnumModel_InvoiceTaxRule;
 
   /** A common tax text would be 'Umsatzsteuer 19%' */
   taxText: string;
 
-  /** Tax type of the invoice.
-There are four tax types:
+  /** Use this in sevdesk-Update 1.0 (instead of taxRule).
+
+Tax type of the invoice. There are four tax types:
 1. default - Umsatzsteuer ausweisen
 2. eu - Steuerfreie innergemeinschaftliche Lieferung (Europäische Union)
 3. noteu - Steuerschuldnerschaft des Leistungsempfängers (außerhalb EU, z. B. Schweiz)
@@ -7578,6 +7584,93 @@ export enum EnumModel_InvoiceStatus {
   "KEY_100" = "100",
   "KEY_200" = "200",
   "KEY_1000" = "1000",
+}
+export enum EnumModel_InvoiceTaxRule {
+  /** Umsatzsteuerpflichtige Umsätze */
+  "TAXABLE_REVENUE"={
+    id: 1,
+    objectName: "TaxRule"
+  },
+  /** Ausfuhren */
+  "EXPORTS"={
+    id: 2,
+    objectName: "TaxRule"
+  },
+  /** Innergemeinschaftliche Lieferungen */
+  "INTRA_COMMUNITY_SUPPLIES"={
+    id: 3,
+    objectName: "TaxRule"
+  },
+  /** Steuerfreie Umsätze §4 UStG */
+  "TAX_FREE_REVENUE_SECTION_4"={
+    id: 4,
+    objectName: "TaxRule"
+  },
+  /** Reverse Charge gem. §13b UStG (field 60 in VAT return) */
+  "REVERSE_CHARGE_13B_FIELD_60"={
+    id: 5,
+    objectName: "TaxRule"
+  },
+  /** Innergemeinschaftliche Erwerbe */
+  "INTRA_COMMUNITY_ACQUISITIONS"={
+    id: 8,
+    objectName: "TaxRule"
+  },
+  /** Vorsteuerabziehbare Aufwendungen */
+  "DEDUCTIBLE_INPUT_TAX_EXPENSES"={
+    id: 9,
+    objectName: "TaxRule"
+  },
+  /** Nicht vorsteuerabziehbare Aufwendungen */
+  "NON_DEDUCTIBLE_INPUT_TAX_EXPENSES"={
+    id: 10,
+    objectName: "TaxRule"
+  },
+  /** Steuer nicht erhoben nach §19UStG */
+  "SMALL_BUSINESS_SECTION_19"={
+    id: 11,
+    objectName: "TaxRule"
+  },
+  /** Reverse Charge gem. §13b Abs. 2 UStG mit Vorsteuerabzug 0% (19%) */
+  "REVERSE_CHARGE_13B_ABS_2_WITH_DEDUCTION"={
+    id: 12,
+    objectName: "TaxRule"
+  },
+  /** Reverse Charge gem. §13b UStG ohne Vorsteuerabzug 0% (19%) */
+  "REVERSE_CHARGE_13B_WITHOUT_DEDUCTION"={
+    id: 13,
+    objectName: "TaxRule"
+  },
+  /** Reverse Charge gem. §13b Abs. 1 EU Umsätze 0% (19%) */
+  "REVERSE_CHARGE_13B_ABS_1_EU"={
+    id: 14,
+    objectName: "TaxRule"
+  },
+  /** Nicht im Inland steuerbare Leistung */
+  "NON_DOMESTIC_TAXABLE_SERVICE"={
+    id: 17,
+    objectName: "TaxRule"
+  },
+  /** One Stop Shop (goods) */
+  "ONE_STOP_SHOP_GOODS"={
+    id: 18,
+    objectName: "TaxRule"
+  },
+  /** One Stop Shop (electronic service) */
+  "ONE_STOP_SHOP_ELECTRONIC_SERVICE"={
+    id: 19,
+    objectName: "TaxRule"
+  },
+  /** One Stop Shop (other service) */
+  "ONE_STOP_SHOP_OTHER_SERVICE"={
+    id: 20,
+    objectName: "TaxRule"
+  },
+  /** Reverse Charge gem. §18b UStG (field 21 in VAT return) */
+  "REVERSE_CHARGE_18B_FIELD_21"={
+    id: 21,
+    objectName: "TaxRule"
+  }
 }
 export enum EnumModel_InvoiceTaxType {
   "default" = "default",
