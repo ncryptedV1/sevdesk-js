@@ -5677,7 +5677,7 @@ Tax rates are heavily connected to the tax type used. */
   sendPaymentReceivedNotificationDate?: string;
 }
 
-export interface Model_Invoice {
+export interface Model_InvoiceBase {
   /** The invoice id. <span style='color:red'>Required<\/span> if you want to create or update an invoice position for an existing invoice */
   id?: number;
 
@@ -5755,27 +5755,8 @@ export interface Model_Invoice {
   /** This is not used anymore. Use the taxRate of the individual positions instead. */
   taxRate: number;
 
-  /** Use this in sevdesk-Update 2.0 (replaces taxType / taxSet).
-
-See <a href='https:\/\/api.sevdesk.de\/#section\/sevdesk-Update-2.0/Tax-Rules'>list of available VAT rules<\/a>. */
-  taxRule: EnumModel_InvoiceTaxRule;
-
   /** A common tax text would be 'Umsatzsteuer 19%' */
   taxText: string;
-
-  /** Use this in sevdesk-Update 1.0 (instead of taxRule).
-
-Tax type of the invoice. There are four tax types:
-1. default - Umsatzsteuer ausweisen
-2. eu - Steuerfreie innergemeinschaftliche Lieferung (Europäische Union)
-3. noteu - Steuerschuldnerschaft des Leistungsempfängers (außerhalb EU, z. B. Schweiz)
-4. custom - Using custom tax set
-5. ss - Not subject to VAT according to §19 1 UStG
-Tax rates are heavily connected to the tax type used. */
-  taxType: EnumModel_InvoiceTaxType;
-
-  /** Tax set of the invoice. Needs to be added if you chose the tax type custom */
-  taxSet?: object;
 
   /** Defines how many reminders have already been sent for the invoice.
     Starts with 1 (Payment reminder) and should be incremented by one every time another reminder is sent. */
@@ -5856,6 +5837,31 @@ Tax rates are heavily connected to the tax type used. */
   /**  */
   mapAll: boolean;
 }
+
+export interface Model_InvoiceWithTaxRule extends Model_InvoiceBase {
+  /** Use this in sevdesk-Update 2.0 (replaces taxType / taxSet).
+
+See <a href='https:\/\/api.sevdesk.de\/#section\/sevdesk-Update-2.0/Tax-Rules'>list of available VAT rules<\/a>. */
+  taxRule: EnumModel_InvoiceTaxRule;
+
+  /** Tax set of the invoice. Needs to be added if you chose the tax type custom */
+  taxSet?: object;
+}
+
+export interface Model_InvoiceWithTaxType extends Model_InvoiceBase {
+  /** Use this in sevdesk-Update 1.0 (instead of taxRule).
+
+Tax type of the invoice. There are four tax types:
+1. default - Umsatzsteuer ausweisen
+2. eu - Steuerfreie innergemeinschaftliche Lieferung (Europäische Union)
+3. noteu - Steuerschuldnerschaft des Leistungsempfängers (außerhalb EU, z. B. Schweiz)
+4. custom - Using custom tax set
+5. ss - Not subject to VAT according to §19 1 UStG
+Tax rates are heavily connected to the tax type used. */
+  taxType: EnumModel_InvoiceTaxType;
+}
+
+export type Model_Invoice = Model_InvoiceWithTaxRule | Model_InvoiceWithTaxType;
 
 export interface Model_InvoicePos {
   /** The invoice position id. <span style='color:red'>Required<\/span> if you want to update an invoice position for an existing invoice */
